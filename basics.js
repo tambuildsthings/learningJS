@@ -25,8 +25,8 @@ if (a == 2 || b == 2)
 }
 
 // use OR to set a default
-const car = {}
-const color = car.color || 'green'
+const bus = {}
+const color = bus.color || 'green'
 
 
 // arrays
@@ -324,11 +324,163 @@ const sNums = [2, 4, 22, 3, 10, 1, 5]
 console.log(sNums.sort((a, b) => (a > b ? 1 : -1)))
 
 // find() and findIndex()
-console.log(`
---find()`)
-
 const fNums = [2, 4, 22, 3, 10, 1, 5]
-const found = fNums.find((item) => item === 10)
-const foundI = fNums.findIndex((item) => item === 10)
-console.log(found)
-console.log(foundI)
+const found = fNums.find((item) => item > 10)
+const foundI = fNums.findIndex((item) => item === 4)
+found
+foundI
+
+// forEach()
+// similar to map() bit you don't get an array back with forEach()
+console.log(`
+--forEach()`)
+const stuff = ['cake', 'wooden box', 'key', 'golf club']
+stuff.forEach((thing) => {
+  if (thing != 'key') {
+    console.log(`Found a ${thing}`)
+  }
+})
+
+const stuff2 = [1, 2, 3, 'a', 'b', 'c']
+stuff2.forEach((element, index) => {
+  console.log(element, index)
+})
+
+
+// Objects
+console.log(`
+--Objects`)
+
+// make an Ojbect:
+// like this: const car = {}
+// same as: const car = new Object()
+// same as: const car = Object.create({})
+
+const truck = {
+  color: 'blue',
+  size: '5 meters',
+  brand: 'Toyota',
+  model: 'Hilux'
+}
+console.log(truck)
+console.log(truck.size)
+
+// updating a value in an object
+truck.color = 'red'
+console.log(truck)
+
+// adding a value to an object
+truck.registration = 'ABC123FJ'
+console.log(truck)
+
+// deleting a value from an object
+delete truck.registration
+console.log(truck)
+
+console.log(`
+--Object methods (which are functions)`)
+// in an existing object
+truck.start = function(){
+  console.log("Truck engine started")
+}
+truck.start()
+
+// in a new object
+const car = {
+  start: function() {
+    console.log("Car engine started")
+  },
+  stop: function() {
+    console.log("Car engine stopped")
+  }
+}
+car.start()
+car.stop()
+
+truck.goTo = function(destination){
+  console.log(`Driving to ${destination}.`)
+}
+truck.goTo('Paris')
+
+// Passing objects into functions
+const printNameAndAge = ({ name, age }) => {
+  console.log(name, age)
+}
+
+const person = {
+  name: 'Tam',
+  age: 35
+}
+
+printNameAndAge(person)
+
+// Using this inside object methods
+// Only works with standard functions
+
+const motorbike = {
+  brand: "Yamaha",
+  model: "R6",
+  start: function () {
+    console.log(`Started ${this.brand} ${this.model}`)
+  },
+}
+
+motorbike.start()
+
+// Destructing objects
+console.log(`
+--Manipulating objects`)
+console.log(truck)
+
+// get values from an object and assign them to variables
+const {brand, color} = truck
+console.log(brand)
+console.log(color)
+console.log(`My favourite trucks are ${color} ${brand}s.`)
+
+// get a value from an object and assign it to a new named variable
+const {model: favModel} = truck
+console.log(favModel)
+console.log(`If I had to buy a truck, I'd buy a ${color} ${favModel}.`)
+
+// Cloning objects - deep cloning with structuredClone()
+const dogA = { dog: { name: 'Peter', breed: 'Lab' } }
+const dogB = structuredClone(dogA)
+
+console.log(dogA)
+console.log(dogB)
+
+dogA.dog.name = 'Liam'
+
+console.log(dogA)
+console.log(dogB)
+
+// Sort the objects in an array
+const students = [
+  { name: 'Bill', age: '29' },
+  { name: 'Wendy', age: '24' },
+  { name: 'Graham', age: '32' },
+  { name: 'Amanda', age: '29' }
+]
+
+console.log(students)
+// sort on name values
+students.sort((a, b) => (a.name > b.name) ? 1 : -1)
+// sort of age values
+students.sort((a, b) => (a.age > b.age) ? 1 : -1)
+// sort by age and then name values
+students.sort((a, b) => (a.age > b.age) ? 1 : (a.age === b.age) ? ((a.name > b.name) ? 1 : -1) : -1 )
+
+// mergine objects
+const identity = {
+  name: 'Tam',
+  nationality: 'British'
+}
+
+const ageData = {
+  age: 35
+}
+
+const personalData = {...identity, ...ageData }
+
+console.log(personalData)
