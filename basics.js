@@ -26,7 +26,7 @@ if (a == 2 || b == 2)
 
 // use OR to set a default
 const bus = {}
-const color = bus.color || 'green'
+const buscolor = bus.buscolor || 'green'
 
 
 // arrays
@@ -88,6 +88,14 @@ const [first, second, ...others] = list
 first
 second
 others
+
+// accessing items of an array
+const itemsArray = [['first', 111], ['second', 222], ['third', 333]]
+for (item of itemsArray) {
+  console.log(item)  // [ 'first', 111 ]
+  console.log(item[0]) // 'first'
+  console.log(item[1]) // 111
+}
 
 // conditionals
 console.log(`--conditionals
@@ -319,7 +327,7 @@ const sA = ['b', 'e', 'c', 'a', 'd', 'egg', 'big']
 console.log(sA.sort())
 console.log(sA.reverse())
 
-// sorting numbers
+// sorting numbers in an array
 const sNums = [2, 4, 22, 3, 10, 1, 5]
 console.log(sNums.sort((a, b) => (a > b ? 1 : -1)))
 
@@ -442,6 +450,11 @@ console.log(`My favourite trucks are ${color} ${brand}s.`)
 const {model: favModel} = truck
 console.log(favModel)
 console.log(`If I had to buy a truck, I'd buy a ${color} ${favModel}.`)
+
+// Cloning objects - shallow cloning with spread operator
+const aVar = { objA: 'this is some text in objA' }
+const bVar = { ...aVar }
+console.log(bVar)
 
 // Cloning objects - deep cloning with structuredClone()
 const dogA = { dog: { name: 'Peter', breed: 'Lab' } }
