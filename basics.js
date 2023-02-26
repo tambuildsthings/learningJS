@@ -497,3 +497,105 @@ const ageData = {
 const personalData = {...identity, ...ageData }
 
 console.log(personalData)
+
+// Promises
+console.log(`
+--promises`)
+
+let done = true
+
+// using resolve and reject in a promise function
+const isFinished = new Promise((resolve, reject) => {
+  if (done) {
+    const workDone = 'Promise has resolved as true'
+    const test2 = 'You can send multiple things back resolve'
+    resolve(`${workDone} ${test2}`)
+  } else {
+    const why = 'Promise is rejected or errored'
+    reject(why)
+  }
+})
+
+// calling the promise
+isFinished.then(ok => { // .then keyword is used to access the output of resolve from the promise
+  console.log(ok)
+}).catch(err => { // .catch keyword is used to access the output of reject from the promise
+  console.error(err)
+});
+
+// Async functions
+console.log(`
+--async functions`)
+
+const isFinishedAsync = new Promise((resolve, reject) => {
+  if (done) {
+    const workDone = 'Promise has resolved as true'
+    const test2 = 'This time from an async function'
+    resolve(`${workDone} ${test2}`)
+  } else {
+    const why = 'Promise is rejected or errored (async)'
+    reject(why)
+  }
+})
+
+// calling the isFinishedAsync promise via async function
+const result = async () => {
+  try {
+    const out = await isFinishedAsync
+     console.log(out)
+  } catch(err) {
+    console.log(err);
+  }
+  
+}
+result();
+
+// calling the isFinishedAsync promise via IIFE
+;(async () => {
+  try {
+    const out = await isFinishedAsync
+    console.log(out)
+  } catch(err) {
+    console.error(err)
+  }
+})()
+
+// Fetch API
+
+console.log(`
+--fetch API`)
+
+// basic async fetch
+;(async () => {
+	const url = `https://api.github.com/users/tambuildsthings`
+  const response = await fetch(url)
+  const data = await response.json()
+  console.log(response.status)
+  console.log(data)
+})()
+
+// getting specifically the json object
+;(async () => {
+  const url = `https://api.github.com/users/tambuildsthings`
+  const response = await fetch(url)
+  const Jbody = await response.json()
+  console.log(Jbody)
+})()
+
+// setting the request headers
+const options = {
+  headers: {
+    "Content-type": "application/json",
+  }
+}
+
+;(async () => {
+  try {
+    const url = `https://api.github.com/users/tambuildsthings`
+    const response = await fetch(url, options)
+    const data = await response.json()
+    console.log(data)
+  } catch (err) {
+    console.error("Request failed", err)
+  }
+})()
