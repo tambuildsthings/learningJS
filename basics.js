@@ -599,3 +599,28 @@ const options = {
     console.error("Request failed", err)
   }
 })()
+
+
+// Errors
+console.log(`
+--errors`)
+
+// throwing exceptions 
+const testErrors = (param) => {
+  if (typeof param !== 'number') {
+    throw 'The param should be a number!'
+  }
+  console.log(`The test ran successfully.`)
+}
+
+// for example
+// testErrors(10) // this is fine
+// testErrors('text') // this throws the execption
+
+// handling exceptions using try catch
+try {
+  testErrors(10)
+  testErrors(`text`)
+} catch (err) {
+  console.warn(err) // use console.warn or console.error depending on severity
+}
